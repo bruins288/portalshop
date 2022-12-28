@@ -6,7 +6,7 @@ body {
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;
-  background-color: #f3f3f7;
+  background-color: #fdfdfd;
   margin: 50px auto;
   border-radius: 10px;
   max-width: 1400px;
@@ -15,9 +15,10 @@ body {
 .header {
   padding: 40px 0;
   background-color: $hard-black;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   .container {
-    @include flex-between;
+    @include flex-content-between;
     align-items: center;
     width: 90%;
     margin: 0 auto;
@@ -48,7 +49,7 @@ body {
       border-radius: 50%;
       margin-left: 15px;
       font-size: 12px;
-      background-color: rgb(227, 24, 54);
+      background-color: $red;
       cursor: pointer;
       border: none;
       span {
@@ -58,11 +59,11 @@ body {
         top: -8px;
         right: -8px;
         background: rgb(255, 255, 255);
-        border: 1px solid rgb(227, 24, 54);
+        border: 1px solid $red;
         border-radius: 50%;
         font-weight: 600;
-        color: rgb(227, 24, 54);
-        @include flex-center;
+        color: $red;
+        @include flex-content-center;
         align-items: center;
       }
     }
@@ -75,7 +76,274 @@ body {
   }
 }
 .content {
-  padding: 40px 0;
+  padding: 20px 0;
   &__top {
+    @include flex-content-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    .types {
+      menu {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+          margin-right: 10px;
+          margin-bottom: 10px;
+          padding: 13px 30px;
+          font-weight: bold;
+          border-radius: 30px;
+          border: 1px solid rgb(213, 212, 212);
+          cursor: pointer;
+          transition: background-color 0.1s ease-in-out;
+          @include noselect();
+          &:first-child {
+            margin-left: 30px;
+          }
+          &:hover {
+            background-color: darken(#eeeeee, 2%);
+          }
+
+          &:active {
+            background-color: darken(#f9f9f9, 5%);
+          }
+
+          &.active {
+            background-color: $hard-black;
+            color: $white;
+          }
+        }
+      }
+    }
+    .sort {
+      position: relative;
+      &__label {
+        @include flex-items-center;
+        margin-right: 40px;
+        b {
+          margin-right: 10px;
+        }
+        span {
+          color: $red;
+          border-bottom: 1px dashed $red;
+          cursor: pointer;
+          font-weight: bold;
+        }
+      }
+      &__popup {
+        position: absolute;
+        right: 40px;
+        margin-top: 15px;
+        background: #ffffff;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 10px 0;
+        width: 160px;
+
+        ul {
+          overflow: hidden;
+          li {
+            font-weight: bold;
+            padding: 12px 20px;
+            cursor: pointer;
+
+            &.active,
+            &:hover {
+              background: rgba(254, 95, 30, 0.05);
+            }
+
+            &.active {
+              font-weight: bold;
+              color: $red;
+            }
+          }
+        }
+      }
+    }
   }
+  &__title {
+    margin: 35px 0px 35px 30px;
+  }
+  &__items {
+    @include flex-content-between;
+    flex-wrap: wrap;
+    margin: 0 30px;
+    .pizza-card {
+      max-width: 285px;
+      margin-bottom: 65px;
+      border: 1px solid $gray;
+      border-radius: 10px;
+      box-sizing: content-box;
+      padding: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+
+      &:not(:nth-of-type(4n)) {
+        margin-right: 35px;
+      }
+
+      &__img {
+        width: 260px;
+        margin-bottom: 5px;
+        margin-left: 12px;
+      }
+      &__title {
+        height: 87px;
+        margin-bottom: 12px;
+        h4 {
+          font-size: 20px;
+          font-weight: bold;
+          line-height: 24px;
+          color: $colorNameItem;
+          text-align: center;
+        }
+        p {
+          line-height: 20px;
+          max-height: 137px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+      }
+      &__selector {
+        @include flex-direction-column;
+        background-color: $background;
+        border-radius: 10px;
+        padding: 6px;
+        ul {
+          display: flex;
+          flex: 1;
+          &:first-of-type {
+            margin-bottom: 6px;
+          }
+          li {
+            padding: 8px;
+            flex: 1;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            @include noselect();
+            text-align: center;
+            &.active {
+              background: $colorSelector;
+              box-shadow: 0px 2px 4px rgba(196, 196, 196, 0.4);
+              border-radius: 5px;
+              cursor: auto;
+            }
+          }
+        }
+      }
+      &__bottom {
+        @include flex-content-between;
+        align-items: center;
+        margin-top: 20px;
+      }
+      &__price {
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 27px;
+        letter-spacing: 0.015em;
+      }
+    }
+  }
+}
+.button {
+  display: inline-block;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 10px 20px;
+  min-width: 100px;
+  cursor: pointer;
+  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+  border: 1px solid transparent;
+  @include noselect();
+  i,
+  span,
+  path,
+  svg {
+    transition: all $duration ease-in-out;
+  }
+  &--outline {
+    background-color: $white;
+    border-color: $red;
+    &,
+    span {
+      color: $red;
+    }
+    svg {
+      path {
+        fill: $red;
+      }
+    }
+    &:hover {
+      background-color: $red;
+
+      &,
+      span {
+        color: $white;
+      }
+
+      svg {
+        path {
+          fill: $white;
+        }
+      }
+    }
+
+    &:active {
+      background-color: darken($red, 8%);
+    }
+  }
+  &--add {
+    svg {
+      margin-right: 8px;
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 16px;
+      margin-right: 5px;
+    }
+
+    &:hover {
+      i {
+        background-color: $white;
+        color: $red;
+      }
+    }
+
+    i {
+      display: inline-block;
+      border-radius: 30px;
+      background-color: $red;
+      color: $white;
+      font-weight: 600;
+      width: 22px;
+      height: 22px;
+      font-style: normal;
+      font-size: 13px;
+      line-height: 22px;
+      position: relative;
+      top: -1px;
+      left: 3px;
+    }
+  }
+}
+.about {
+  padding: 20px 110px 60px;
+  h1,
+  h2,
+  p {
+    margin-bottom: 20px;
+  }
+}
+.footer {
+  padding: 40px 0;
+  background-color: $hard-black;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: center;
 }

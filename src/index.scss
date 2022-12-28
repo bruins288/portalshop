@@ -17,7 +17,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 h1 {
-  font-size: 36px;
+  font-size: 32px;
 }
 h2 {
   font-size: 24px;
@@ -33,13 +33,4 @@ p {
 a {
   color: $white;
   text-decoration: none;
-}
-@mixin noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Opera and Firefox */
 }
