@@ -1,4 +1,5 @@
 @import "./scss/variables.scss";
+@import "./scss/all.scss";
 
 body {
   background-color: $background;
@@ -12,69 +13,6 @@ body {
   max-width: 1400px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
-.header {
-  padding: 40px 0;
-  background-color: $hard-black;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  .container {
-    @include flex-content-between;
-    align-items: center;
-    width: 90%;
-    margin: 0 auto;
-  }
-  &__logo {
-    display: flex;
-    img {
-      margin-right: 15px;
-    }
-  }
-  &__name {
-    color: $white;
-    h1 {
-      letter-spacing: 1%;
-      text-transform: uppercase;
-    }
-  }
-  &__cart {
-    color: $white;
-    span:first-child {
-      font-size: 18px;
-    }
-
-    button {
-      position: relative;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      margin-left: 15px;
-      font-size: 12px;
-      background-color: $red;
-      cursor: pointer;
-      border: none;
-      span {
-        position: absolute;
-        width: 24px;
-        height: 24px;
-        top: -8px;
-        right: -8px;
-        background: rgb(255, 255, 255);
-        border: 1px solid $red;
-        border-radius: 50%;
-        font-weight: 600;
-        color: $red;
-        @include flex-content-center;
-        align-items: center;
-      }
-    }
-    button:hover {
-      svg {
-        transform: rotate(90deg);
-        transition: transform 0.3s ease-out;
-      }
-    }
-  }
-}
 .content {
   padding: 20px 0;
   &__top {
@@ -82,84 +20,6 @@ body {
     align-items: center;
     width: 100%;
     flex-wrap: wrap;
-    .types {
-      menu {
-        display: flex;
-        flex-wrap: wrap;
-        li {
-          margin-right: 10px;
-          margin-bottom: 10px;
-          padding: 13px 30px;
-          font-weight: bold;
-          border-radius: 30px;
-          border: 1px solid rgb(213, 212, 212);
-          cursor: pointer;
-          transition: background-color 0.1s ease-in-out;
-          @include noselect();
-          &:first-child {
-            margin-left: 30px;
-          }
-          &:hover {
-            background-color: darken(#eeeeee, 2%);
-          }
-
-          &:active {
-            background-color: darken(#f9f9f9, 5%);
-          }
-
-          &.active {
-            background-color: $hard-black;
-            color: $white;
-          }
-        }
-      }
-    }
-    .sort {
-      position: relative;
-      &__label {
-        @include flex-items-center;
-        margin-right: 40px;
-        b {
-          margin-right: 10px;
-        }
-        span {
-          color: $red;
-          border-bottom: 1px dashed $red;
-          cursor: pointer;
-          font-weight: bold;
-        }
-      }
-      &__popup {
-        position: absolute;
-        right: 40px;
-        margin-top: 15px;
-        background: #ffffff;
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
-        border-radius: 10px;
-        overflow: hidden;
-        padding: 10px 0;
-        width: 160px;
-
-        ul {
-          overflow: hidden;
-          li {
-            font-weight: bold;
-            padding: 12px 20px;
-            cursor: pointer;
-
-            &.active,
-            &:hover {
-              background: rgba(254, 95, 30, 0.05);
-            }
-
-            &.active {
-              font-weight: bold;
-              color: $red;
-            }
-          }
-        }
-      }
-    }
   }
   &__title {
     margin: 35px 0px 35px 30px;
