@@ -1,0 +1,301 @@
+{
+  "types":[
+    {
+      "id":1,
+      "name":"Мясные"
+    },
+    {
+      "id":2,
+      "name":"Барбекю"
+    },
+    {
+      "id":3,
+      "name":"Острые"
+    },
+    {
+      "id":4,
+      "name":"Экзотические"
+    },
+    {
+      "id":5,
+      "name":"Закрытые"
+    }    
+  ],
+  "pizzas":[
+    {
+      "id":1,
+      "imageUrl":"img/products/1.png",
+      "title":"Мясная",
+      "description":"Ветчина, Курица, Охотничьи колбаски, Пепперони, Сыр Моцарелла, Томатный соус.",
+      "methods":[0, 1],
+      "sizes":[26, 30, 40],
+      "price":709,
+      "typeId":1,
+      "rating":4
+    },
+    {
+      "id":2,
+      "imageUrl":"img/products/2.png",
+      "title":"3 Мяса",
+      "description":"Бекон, Ветчина, Охотничьи колбаски, Сыр Моцарелла, Томатный соус.",
+      "methods":[0, 1],
+      "sizes":[26, 30, 40],
+      "price":569,
+      "typeId":1,
+      "rating":6
+    },
+    {
+      "id":3,
+      "imageUrl":"img/products/3.png",
+      "title":"Чикен бургер",
+      "description":"Бекон, Курица, Лук, Огурцы маринованные, Свежие томаты, Сыр Моцарелла, Соус Пикант.",
+      "methods":[0],
+      "sizes":[26, 40],
+      "price":929,
+      "typeId":1,
+      "rating":5
+    },
+    {
+      "id":4,
+      "imageUrl":"img/products/4.png",
+      "title":"Кордон Блю",
+      "description":"Ветчина, Курица, Соус Карбонара, Сыр Моцарелла, Сыр Роккфорти.",
+      "methods":[0, 1],
+      "sizes":[26, 30, 40],
+      "price":859,
+      "typeId":1,
+      "rating":3
+    }, 
+    {
+      "id":5,
+      "imageUrl":"img/products/5.png",
+      "title":"Пепперони",
+      "description":"Пепперони, Сыр Моцарелла, Томатный соус",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":709,
+      "typeId":1,
+      "rating":8
+    },
+    {
+      "id":6,
+      "imageUrl":"img/products/6.png",
+      "title":"Чикен Терияки",
+      "description":"Курица, Лук, Сыр Моцарелла, Томатный соус , Соус Терияки",
+      "methods":[0, 1],
+      "sizes":[20, 28],
+      "price":709,
+      "typeId":1,
+      "rating":2
+    },
+    {
+      "id":7,
+      "imageUrl":"img/products/7.png",
+      "title":"4 сезона",
+      "description":"Бекон, Ветчина, Грибы, Курица, Лук, Маслины, Огурцы маринованные, Охотничьи колбаски, Пепперони, Свежие томаты, Соус BBQ, Сыр Моцарелла, Сыр Фета, Томатный соус",
+      "methods":[0, 1],
+      "sizes":[28, 33],
+      "price":789,
+      "typeId":1,
+      "rating":9
+    },
+    {
+      "id":8,
+      "imageUrl":"img/products/8.png",
+      "title":"Сырная с ветчиной",
+      "description":"Ветчина, Сыр Моцарелла, Томатный соус",
+      "methods":[1],
+      "sizes":[20, 28, 33],
+      "price":549,
+      "typeId":1,
+      "rating":7
+    },
+    {
+      "id":9,
+      "imageUrl":"img/products/9.png",
+      "title":"Гавайская",
+      "description":"Ананас, Ветчина, Сыр Моцарелла, Томатный соус",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":629,
+      "typeId":1,
+      "rating":4
+    },
+    {
+      "id":10,
+      "imageUrl":"img/products/10.png",
+      "title":"Ветчина и грибы",
+      "description":"Ветчина, Грибы, Сыр Моцарелла, Томатный соус",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":789,
+      "typeId":1,
+      "rating":3
+    },
+    {
+      "id":11,
+      "imageUrl":"img/products/11.png",
+      "title":"Карбонара",
+      "description":"Бекон, Свежие томаты, Соус Карбонара, Сыр Моцарелла",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":789,
+      "typeId":1,
+      "rating":8
+    },
+    {
+      "id":12,
+      "imageUrl":"img/products/12.png",
+      "title":"Баварская",
+      "description":"Лук, Огурцы маринованные, Охотничьи колбаски, Сыр Моцарелла, Томатный соус",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":859,
+      "typeId":1,
+      "rating":5
+    },
+    {
+      "id":13,
+      "imageUrl":"img/products/13.png",
+      "title":"Дабл Пепперони",
+      "description":"Пепперони, Сыр Моцарелла, Томатный соус",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":859,
+      "typeId":1,
+      "rating":4
+    },
+    {
+      "id":14,
+      "imageUrl":"img/products/14.png",
+      "title":"Чикен BBQ",
+      "description":"Грибы, Курица, Лук, Соус BBQ, Сыр Моцарелла, Томатный соус",
+      "methods":[0, 1],
+      "sizes":[20, 33],
+      "price":429,
+      "typeId":2,
+      "rating":3
+    },
+    {
+      "id":15,
+      "imageUrl":"img/products/15.png",
+      "title":"Микс BBQ",
+      "description":"Бекон, Ветчина, Курица, Лук, Соус BBQ, Сыр Моцарелла, Томатный соус",
+      "methods":[1],
+      "sizes":[20, 28, 33],
+      "price":859,
+      "typeId":2,
+      "rating":2
+    },
+    {
+      "id":16,
+      "imageUrl":"img/products/16.png",
+      "title":"Пицца-туница",
+      "description":"Лук, Маслины, Свежие томаты, Сыр Моцарелла, Соус Чесночный Оригинальный, Тунец",
+      "methods":[0, 1],
+      "sizes":[33],
+      "price":999,
+      "typeId":3,
+      "rating":5
+    },
+    {
+      "id":17,
+      "imageUrl":"img/products/17.png",
+      "title":"Пепперони Ранч",
+      "description":"Пепперони, Сыр Моцарелла, Соус Чесночный Оригинальный",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":429,
+      "typeId":3,
+      "rating":6
+    },
+    {
+      "id":18,
+      "imageUrl":"img/products/18.png",
+      "title":"Чикен Ранч",
+      "description":"Курица, Свежие томаты, Сыр Моцарелла, Соус Чесночный Оригинальный",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":709,
+      "typeId":3,
+      "rating":6
+    },
+    {
+      "id":19,
+      "imageUrl":"img/products/19.png",
+      "title":"Диабло",
+      "description":"Лук, Пепперони, Перец Халапеньо, Свежие томаты, Сыр Моцарелла, Томатный соус",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":859,
+      "typeId":3,
+      "rating":6
+    },
+    {
+      "id":20,
+      "imageUrl":"img/products/20.png",
+      "title":"Груша-Блю Чиз",
+      "description":"Соус Карбонара, Сыр Моцарелла, Сыр Роккфорти, Груша консервированная",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":859,
+      "typeId":4,
+      "rating":9
+    },
+    {
+      "id":21,
+      "imageUrl":"img/products/21.png",
+      "title":"Веджи Fit & Fresh",
+      "description":"Грибы, Маслины, Свежие томаты, Сыр Моцарелла, Сыр Фета, Томатный соус",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":789,
+      "typeId":4,
+      "rating":7
+    },
+    {
+      "id":22,
+      "imageUrl":"img/products/22.png",
+      "title":"Карамельный Ананас",
+      "description":"Ананас, Соус Карамельный, Соус Сырный, Сыр Моцарелла",
+      "methods":[0, 1],
+      "sizes":[20, 28, 33],
+      "price":789,
+      "typeId":4,
+      "rating":5
+    },
+    {
+      "id":23,
+      "imageUrl":"img/products/23.png",
+      "title":"Пицца Пай Бекон и Халапеньо",
+      "description":"Бекон, Перец Халапеньо, Сыр Моцарелла",
+      "methods":[1],
+      "sizes":[20],
+      "price":429,
+      "typeId":5,
+      "rating":4
+    },
+    {
+      "id":24,
+      "imageUrl":"img/products/24.png",
+      "title":"Пицца Пай Ветчина и сыр",
+      "description":"Ветчина, Сыр Моцарелла",
+      "methods":[1],
+      "sizes":[20],
+      "price":429,
+      "typeId":5,
+      "rating":6
+    },
+    {
+      "id":25,
+      "imageUrl":"img/products/25.png",
+      "title":"Пицца Пай Двойной сыр",
+      "description":"Сыр Моцарелла",
+      "methods":[1],
+      "sizes":[20],
+      "price":429,
+      "typeId":5,
+      "rating":9
+    }                                                                                                                                                                                                                                      
+  ]
+}

@@ -1,23 +1,43 @@
 import React from "react";
 
-function Card(props) {
-  console.log(props);
+function Card({ imageUrl, title, description, price, methods, sizes }) {
+  const methodNames = ["тонкое", "традиционное"];
+  const [activeMethod, setActiveMethod] = React.useState(0);
+  const [activeSize, setActiveSize] = React.useState(0);
+
   return (
     <div className="pizza-card">
-      <img className="pizza-card__img" src={props.image} alt="pizza" />
+      <img className="pizza-card__img" src={imageUrl} alt="pizza" />
       <div className="pizza-card__title">
-        <h4>{props.title}</h4>
-        <p>{props.description}</p>
+        <h4>{title}</h4>
+        <p>{description}</p>
       </div>
       <div className="pizza-card__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {methods.map((method) => (
+            <li
+              key={method}
+              className={
+                activeMethod === method && methods.length > 1 ? "active" : ""
+              }
+              onClick={() => setActiveMethod(method)}
+            >
+              {methodNames[method]}
+            </li>
+          ))}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {sizes.map((size, index) => (
+            <li
+              key={index}
+              className={
+                activeSize === index && sizes.length > 1 ? "active" : ""
+              }
+              onClick={() => setActiveSize(index)}
+            >
+              {size} см.
+            </li>
+          ))}
         </ul>
       </div>
       <div className="pizza-card__bottom">
@@ -35,9 +55,9 @@ function Card(props) {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          <i>{0}</i>
         </button>
-        <div className="pizza-card__price">от {props.price} ₽</div>
+        <div className="pizza-card__price">от {price} ₽</div>
       </div>
     </div>
   );

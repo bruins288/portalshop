@@ -7,6 +7,7 @@ import Card from "./components/Card.jsx";
 import Footer from "./components/Footer.jsx";
 
 import "./App.scss";
+import data from "./assets/db.json";
 
 function App() {
   return (
@@ -21,31 +22,9 @@ function App() {
           <h1>В наличие</h1>
         </div>
         <div className="content__items">
-          <Card
-            image="img/products/1.png"
-            title="Мясная"
-            description="Ветчина, Курица, Охотничьи колбаски, Пепперони, Сыр Моцарелла,
-          Томатный соус."
-            price={709}
-          />
-          <Card
-            image="img/products/2.png"
-            title="3 Мяса"
-            description="Бекон, Ветчина, Охотничьи колбаски, Сыр Моцарелла, Томатный соус."
-            price={569}
-          />
-          <Card
-            image="img/products/3.png"
-            title="Чикен бургер"
-            description="Бекон, Курица, Лук, Огурцы маринованные, Свежие томаты, Сыр Моцарелла, Соус Пикант."
-            price={929}
-          />
-          <Card
-            image="img/products/4.png"
-            title="Кордон Блю"
-            description="Ветчина, Курица, Соус Карбонара, Сыр Моцарелла, Сыр Роккфорти."
-            price={859}
-          />
+          {data.pizzas.map((item) => (
+            <Card key={item.id} {...item} />
+          ))}
         </div>
       </div>
       <article className="about">
