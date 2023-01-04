@@ -7,9 +7,16 @@ import Card from "./components/Card.jsx";
 import Footer from "./components/Footer.jsx";
 
 import "./App.scss";
-import data from "./assets/db.json";
+import ProductsAPI from "./dal/ProductsAPI.js";
 
 function App() {
+  const [products, setProducts] = React.useState([]);
+  React.useEffect(() => {
+    (async () => {
+      let response = await ProductsAPI.getProducts();
+      setProducts(response.data);
+    })();
+  }, []);
   return (
     <div className="wrapper">
       <Header />
@@ -22,7 +29,7 @@ function App() {
           <h1>В наличие</h1>
         </div>
         <div className="content__items">
-          {data.pizzas.map((item) => (
+          {products.map((item) => (
             <Card key={item.id} {...item} />
           ))}
         </div>
