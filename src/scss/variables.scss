@@ -1,0 +1,36 @@
+$black: #242424;
+$hard-black: #030303;
+$gray: #888d94;
+$white: #ffffff;
+$red: rgb(227, 24, 54);
+$background: #dcdce2;
+$colorNameItem: #505061;
+$colorSelector: rgb(175, 173, 173);
+$container-width: 90%;
+$duration: 0.15s;
+
+@mixin flex-content-between {
+  display: flex;
+  justify-content: space-between;
+}
+@mixin flex-content-center {
+  display: flex;
+  justify-content: center;
+}
+@mixin flex-items-center {
+  display: flex;
+  align-items: center;
+}
+@mixin flex-direction-column {
+  display: flex;
+  flex-direction: column;
+}
+@mixin noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
