@@ -26,6 +26,15 @@
         background-color: $hard-black;
         color: $white;
       }
+      @media (max-width: 1264px) {
+        margin-left: 30px;
+      }
+      @media (max-width: 414px) {
+        @include flex-content-around;
+        margin-left: 10px;
+        font-size: 12px;
+        padding: 8px 20px;
+      }
     }
   }
 }

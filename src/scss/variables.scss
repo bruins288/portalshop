@@ -17,6 +17,18 @@ $duration: 0.15s;
   display: flex;
   justify-content: center;
 }
+@mixin flex-content-around {
+  display: flex;
+  justify-content: space-around;
+}
+@mixin flex-content-start {
+  display: flex;
+  justify-content: flex-start;
+}
+@mixin flex-content-end {
+  display: flex;
+  justify-content: flex-end;
+}
 @mixin flex-items-center {
   display: flex;
   align-items: center;

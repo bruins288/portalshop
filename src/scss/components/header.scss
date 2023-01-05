@@ -22,12 +22,18 @@
     h1 {
       letter-spacing: 1%;
       text-transform: uppercase;
+      @media (max-width: 414px) {
+        font-size: 18px;
+      }
     }
   }
   &__cart {
     color: $white;
     span:first-child {
       font-size: 18px;
+      @media (max-width: 414px) {
+        font-size: 14px;
+      }
     }
 
     button {
