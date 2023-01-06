@@ -13,8 +13,20 @@ class ProductsAPI {
   get instance() {
     return this.#instance;
   }
-  getProducts() {
-    return this.instance.get("pizzas");
+  #getTypedSort(sortedType) {
+    return sortedType === "rating" ? "desc" : "asc";
+  }
+  getProductsSorted(sortedType) {
+    return this.instance.get(
+      `pizzas?_sort=${sortedType}&_order=${this.#getTypedSort(sortedType)}`
+    );
+  }
+  getProductsSortedByTypeId(id, sortedType) {
+    return this.#instance.get(
+      `pizzas?typeId=${id}&_sort=${sortedType}&_order=${this.#getTypedSort(
+        sortedType
+      )}`
+    );
   }
 }
 

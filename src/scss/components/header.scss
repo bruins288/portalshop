@@ -35,37 +35,41 @@
         font-size: 14px;
       }
     }
-
-    button {
-      position: relative;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      margin-left: 15px;
-      font-size: 12px;
-      background-color: $red;
-      cursor: pointer;
-      border: none;
-      span {
-        position: absolute;
-        width: 24px;
-        height: 24px;
-        top: -8px;
-        right: -8px;
-        background: rgb(255, 255, 255);
-        border: 1px solid $red;
-        border-radius: 50%;
-        font-weight: 600;
-        color: $red;
-        @include flex-content-center;
-        align-items: center;
-      }
+  }
+}
+.button-header {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-left: 15px;
+  font-size: 12px;
+  background-color: $red;
+  cursor: pointer;
+  border: none;
+  svg {
+    path {
+      fill: $white;
     }
-    button:hover {
-      svg {
-        transform: rotate(90deg);
-        transition: transform 0.3s ease-out;
-      }
+  }
+  span {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: -8px;
+    right: -8px;
+    background: rgb(255, 255, 255);
+    border: 1px solid $red;
+    border-radius: 50%;
+    font-weight: 600;
+    color: $red;
+    @include flex-content-center;
+    align-items: center;
+  }
+  &:hover {
+    svg {
+      transform: rotate(90deg);
+      transition: transform 0.3s ease-out;
     }
   }
 }

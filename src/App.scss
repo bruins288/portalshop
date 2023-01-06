@@ -126,19 +126,32 @@ body {
   &__top {
     @include flex-content-between;
     align-items: center;
-    font-size: 32px;
   }
   &__title {
-    font-size: 32px;
+    font-size: 30px;
     svg {
       position: relative;
       top: 8px;
       width: 30px;
       height: 40px;
       margin-right: 10px;
+      @media (max-width: 640px) {
+        width: 20px;
+        height: 30px;
+      }
       path {
         stroke-width: 1.9;
       }
+    }
+    @media (max-width: 935px) {
+      margin: 0 20px;
+    }
+    @media (max-width: 640px) {
+      font-size: 20px;
+    }
+    @media (max-width: 414px) {
+      margin: 0 5px;
+      font-size: 18px;
     }
   }
   &__clear {
@@ -152,6 +165,9 @@ body {
       margin-left: 7px;
       color: #b6b6b6;
       font-size: 18px;
+      @media (max-width: 640px) {
+        font-size: 12px;
+      }
     }
     span,
     svg,
@@ -168,10 +184,20 @@ body {
         color: darken($color: #b6b6b6, $amount: 50);
       }
     }
+    @media (max-width: 935px) {
+      margin: 0 20px;
+    }
+    @media (max-width: 414px) {
+      margin: 0 10px;
+    }
   }
   &__container {
     @include flex-content-between;
     flex-wrap: wrap;
+    @media (max-width: 935px) {
+      @include flex-content-center;
+      margin: 0 20px;
+    }
   }
   &__items {
     display: flex;
@@ -189,23 +215,44 @@ body {
       img {
         width: 80px;
         height: 80px;
+        @media (max-width: 935px) {
+          width: 60px;
+          height: 60px;
+        }
+        @media (max-width: 640px) {
+          width: 40px;
+          height: 40px;
+        }
       }
     }
     &-info {
       @include flex-content-center;
       flex-direction: column;
-
       width: 40%;
       h3 {
         font-weight: bold;
         font-size: 22px;
         line-height: 27px;
         letter-spacing: 0.01em;
+        @media (max-width: 650px) {
+          font-size: 16px;
+        }
+        @media (max-width: 380px) {
+          font-size: 14px;
+          margin-left: 5px;
+        }
       }
 
       p {
         font-size: 18px;
         color: $gray;
+        @media (max-width: 650px) {
+          font-size: 12px;
+        }
+        @media (max-width: 380px) {
+          font-size: 10px;
+          margin-left: 5px;
+        }
       }
     }
     &-count {
@@ -215,17 +262,73 @@ body {
       b {
         font-size: 22px;
         letter-spacing: 0.01em;
+        @media (max-width: 850px) {
+          font-size: 18px;
+        }
+        @media (max-width: 380px) {
+          font-size: 16px;
+          margin-top: 5px;
+        }
       }
     }
     &-price {
       @include flex-content-center;
       align-items: center;
       width: 33%;
+      font-size: 20px;
+      @media (max-width: 850px) {
+        font-size: 16px;
+      }
+      @media (max-width: 520px) {
+        display: block;
+        font-size: 14px;
+      }
     }
     &-remove {
       @include flex-content-end;
       align-items: center;
       width: 4%;
+    }
+  }
+  &__bottom {
+    margin: 50px 0;
+    &-details {
+      font-size: 22px;
+      @include flex-content-between;
+      span {
+        font-weight: bold;
+        &:last-child {
+          b {
+            color: $red;
+          }
+        }
+        @media (max-width: 912px) {
+          margin: 14px;
+        }
+        @media (max-width: 820px) {
+          margin: 12px;
+        }
+        @media (max-width: 540px) {
+          font-size: 18px;
+        }
+        @media (max-width: 414px) {
+          margin: 10px 5px;
+          font-size: 12px;
+        }
+      }
+    }
+    &-buttons {
+      margin: 40px 0;
+      @include flex-content-between;
+      @media (max-width: 912px) {
+        margin: 14px;
+      }
+      @media (max-width: 820px) {
+        margin: 10px;
+      }
+      @media (max-width: 414px) {
+        margin: 0 5px;
+      }
     }
   }
 }
@@ -312,6 +415,55 @@ body {
       left: 3px;
     }
   }
+  &--back,
+  &--pay {
+    padding: 16px;
+    width: 200px;
+    @media (max-width: 414px) {
+      width: 100px;
+      padding: 6px;
+      font-size: 12px;
+    }
+  }
+  &--back {
+    @include flex-content-center;
+    align-items: center;
+    background-color: $white;
+    border-color: $colorSelector;
+    svg {
+      margin-right: 10px;
+      path {
+        stroke: $colorSelector;
+      }
+    }
+    span {
+      color: $colorSelector;
+    }
+    &:hover {
+      background-color: darken($color: $colorSelector, $amount: 50);
+      svg {
+        path {
+          stroke: $white;
+        }
+      }
+      span {
+        color: $white;
+      }
+    }
+  }
+  &--pay {
+    background-color: $white;
+    border-color: $red;
+    span {
+      color: $red;
+    }
+    &:hover {
+      background-color: $red;
+      span {
+        color: $white;
+      }
+    }
+  }
 }
 .button-cart {
   display: inline-block;
@@ -338,6 +490,18 @@ body {
           fill: $white;
         }
       }
+      @media (max-width: 850px) {
+        background-color: $white;
+        svg {
+          path {
+            fill: $red;
+          }
+        }
+      }
+    }
+    @media (max-width: 850px) {
+      margin: 0 10px;
+      border: none;
     }
   }
   &__remove {
@@ -359,6 +523,18 @@ body {
           fill: $white;
         }
       }
+      @media (max-width: 850px) {
+        background-color: $white;
+        svg {
+          path {
+            fill: $gray;
+          }
+        }
+      }
+    }
+    @media (max-width: 850px) {
+      margin: 0 10px;
+      border: none;
     }
   }
 }

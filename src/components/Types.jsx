@@ -1,7 +1,6 @@
 import React from "react";
 
-function Types() {
-  const [activeType, setActiveType] = React.useState(0);
+function Types({ id, clickType }) {
   const types = [
     "Все",
     "Мясные",
@@ -17,8 +16,8 @@ function Types() {
         {types.map((element, index) => (
           <li
             key={index}
-            className={activeType === index ? "active" : ""}
-            onClick={() => setActiveType(index)}
+            className={id === index ? "active" : ""}
+            onClick={() => clickType(index)}
           >
             {element}
           </li>

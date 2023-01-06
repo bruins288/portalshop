@@ -10,33 +10,49 @@ import ProductsAPI from "../dal/ProductsAPI.js";
 function Home() {
   const [products, setProducts] = React.useState([]);
   const [isLoading, SetIsLoading] = React.useState(false);
+  const [typeId, setTypeId] = React.useState(0);
+  const [selectedSort, setSelectedSort] = React.useState("rating");
 
   React.useEffect(() => {
+    let response = null;
     try {
       SetIsLoading(true);
       (async () => {
-        let response = await ProductsAPI.getProducts();
+        if (typeId) {
+          response = await ProductsAPI.getProductsSortedByTypeId(
+            typeId,
+            selectedSort
+          );
+        } else {
+          response = await ProductsAPI.getProductsSorted(selectedSort);
+        }
         setProducts(response.data);
         SetIsLoading(false);
       })();
     } catch (error) {
       window.alert("Ошибка загрузки данных.");
       console.log(error.message);
+    } finally {
+      window.scrollTo(0, 0);
     }
-  }, []);
+  }, [typeId, selectedSort]);
+
   return (
     <React.Fragment>
       <React.Fragment>
         <div className="content__top">
-          <Types />
-          <Sort />
+          <Types id={typeId} clickType={(id) => setTypeId(id)} />
+          <Sort
+            selected={selectedSort}
+            changeSort={(sortedType) => setSelectedSort(sortedType)}
+          />
         </div>
         <div className="content__title">
           <h1>В наличие</h1>
         </div>
         <div className="content__items">
           {isLoading
-            ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+            ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
             : products.map((item) => <Card key={item.id} {...item} />)}
         </div>
       </React.Fragment>

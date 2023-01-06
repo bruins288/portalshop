@@ -1,12 +1,15 @@
 import React from "react";
 
-function Sort() {
-  const list = ["популярности", "цене", "алфавиту"];
-  const [selectedSort, setSelectedSort] = React.useState(0);
+function Sort({ selected, changeSort }) {
+  const list = [
+    { name: "популярности", sortedType: "rating" },
+    { name: "цене", sortedType: "price" },
+    { name: "алфавиту", sortedType: "title" },
+  ];
   const [isVisiblePopup, setIsVisiblePopup] = React.useState(false);
 
-  const handleToggleSort = (index) => {
-    setSelectedSort(index);
+  const handleToggleSort = (sortedType) => {
+    changeSort(sortedType);
     setIsVisiblePopup(!isVisiblePopup);
   };
 
@@ -23,7 +26,7 @@ function Sort() {
           ></path>
         </svg>
         <b>Сортировка по:</b>
-        <span>{list[selectedSort]}</span>
+        <span>{list.find((item) => item.sortedType === selected).name}</span>
       </div>
       {isVisiblePopup && (
         <div className="sort__popup">
@@ -31,10 +34,10 @@ function Sort() {
             {list.map((item, index) => (
               <li
                 key={index}
-                className={selectedSort === index ? "active" : ""}
-                onClick={() => handleToggleSort(index)}
+                className={selected === item.sortedType ? "active" : ""}
+                onClick={() => handleToggleSort(item.sortedType)}
               >
-                {item}
+                {item.name}
               </li>
             ))}
           </ul>
