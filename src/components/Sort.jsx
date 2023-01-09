@@ -1,15 +1,21 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-function Sort({ selected, changeSort }) {
-  const list = [
-    { name: "популярности", sortedType: "rating" },
-    { name: "цене", sortedType: "price" },
-    { name: "алфавиту", sortedType: "title" },
-  ];
+import { setSelectedSort } from "../redux/slices/filterSlice.js";
+
+const list = [
+  { name: "популярности", sortedType: "rating" },
+  { name: "цене", sortedType: "price" },
+  { name: "алфавиту", sortedType: "title" },
+];
+
+function Sort() {
   const [isVisiblePopup, setIsVisiblePopup] = React.useState(false);
+  const selected = useSelector((state) => state.filter.selectedSort);
+  const dispatch = useDispatch();
 
   const handleToggleSort = (sortedType) => {
-    changeSort(sortedType);
+    dispatch(setSelectedSort(sortedType));
     setIsVisiblePopup(!isVisiblePopup);
   };
 

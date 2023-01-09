@@ -1,15 +1,15 @@
 import React from "react";
 
-function Types({ id, clickType }) {
-  const types = [
-    "Все",
-    "Мясные",
-    "Барбекю",
-    "Острые",
-    "Экзотические",
-    "Закрытые",
-  ];
+const types = [
+  "Все",
+  "Мясные",
+  "Барбекю",
+  "Острые",
+  "Экзотические",
+  "Закрытые",
+];
 
+function Types({ id, clickType }) {
   return (
     <div className="types">
       <menu>

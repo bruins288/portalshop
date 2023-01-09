@@ -7,6 +7,7 @@
   border-top-right-radius: 10px;
   .container {
     @include flex-content-between;
+    flex-wrap: wrap;
     align-items: center;
     width: 90%;
     margin: 0 auto;

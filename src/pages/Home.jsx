@@ -1,31 +1,45 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import Types from "../components/Types.jsx";
 import Sort from "../components/Sort.jsx";
 import Card from "../components/Card";
 import Skeleton from "../components/Card/Skeleton.jsx";
+import Pagination from "../components/Pagination/index.jsx";
 
 import ProductsAPI from "../dal/ProductsAPI.js";
+import { SearchContext } from "../App.js";
+import { setTypeId } from "../redux/slices/filterSlice.js";
 
 function Home() {
   const [products, setProducts] = React.useState([]);
   const [isLoading, SetIsLoading] = React.useState(false);
-  const [typeId, setTypeId] = React.useState(0);
-  const [selectedSort, setSelectedSort] = React.useState("rating");
+  const { typeId, selectedSort } = useSelector((state) => state.filter);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const { searchValue } = React.useContext(SearchContext);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     let response = null;
+
     try {
       SetIsLoading(true);
       (async () => {
         if (typeId) {
-          response = await ProductsAPI.getProductsSortedByTypeId(
+          response = await ProductsAPI.getProductsByTypeId(
             typeId,
-            selectedSort
+            selectedSort,
+            searchValue,
+            currentPage
           );
         } else {
-          response = await ProductsAPI.getProductsSorted(selectedSort);
+          response = await ProductsAPI.getProducts(
+            selectedSort,
+            searchValue,
+            currentPage
+          );
         }
+
         setProducts(response.data);
         SetIsLoading(false);
       })();
@@ -35,26 +49,31 @@ function Home() {
     } finally {
       window.scrollTo(0, 0);
     }
-  }, [typeId, selectedSort]);
+  }, [typeId, selectedSort, searchValue, currentPage]);
 
+  // const findProducts = products.filter((item) =>
+  //   item.title.toLowerCase().includes(searchValue.toLowerCase())
+  // ); для статичных не меняющихся массивов
   return (
     <React.Fragment>
       <React.Fragment>
         <div className="content__top">
-          <Types id={typeId} clickType={(id) => setTypeId(id)} />
-          <Sort
-            selected={selectedSort}
-            changeSort={(sortedType) => setSelectedSort(sortedType)}
-          />
+          <Types id={typeId} clickType={(id) => dispatch(setTypeId(id))} />
+          <Sort />
         </div>
         <div className="content__title">
           <h1>В наличие</h1>
         </div>
         <div className="content__items">
-          {isLoading
-            ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-            : products.map((item) => <Card key={item.id} {...item} />)}
+          {isLoading ? (
+            [...new Array(8)].map((_, index) => <Skeleton key={index} />)
+          ) : products.length ? (
+            products.map((item) => <Card key={item.id} {...item} />)
+          ) : (
+            <h3>Пицца не найдена</h3>
+          )}
         </div>
+        <Pagination onChangePage={(number) => setCurrentPage(number)} />
       </React.Fragment>
       <article className="about">
         <div>

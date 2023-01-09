@@ -28,6 +28,10 @@ body {
     @include flex-content-start;
     flex-wrap: wrap;
     padding-left: 60px;
+    h3 {
+      opacity: 0.7;
+      margin: 15px 0px;
+    }
     @media (max-width: 1467px) {
       @include flex-content-between;
       padding-left: 30px;
@@ -37,7 +41,7 @@ body {
     }
     .pizza-card {
       max-width: 275px;
-      margin-bottom: 65px;
+      margin-bottom: 50px;
       border: 1px solid $gray;
       border-radius: 10px;
       box-sizing: content-box;
