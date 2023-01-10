@@ -9,13 +9,14 @@ import Pagination from "../components/Pagination/index.jsx";
 
 import ProductsAPI from "../dal/ProductsAPI.js";
 import { SearchContext } from "../App.js";
-import { setTypeId } from "../redux/slices/filterSlice.js";
+import { setCurrentPage, setTypeId } from "../redux/slices/filterSlice.js";
 
 function Home() {
   const [products, setProducts] = React.useState([]);
   const [isLoading, SetIsLoading] = React.useState(false);
-  const { typeId, selectedSort } = useSelector((state) => state.filter);
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const { typeId, selectedSort, currentPage } = useSelector(
+    (state) => state.filter
+  );
   const { searchValue } = React.useContext(SearchContext);
   const dispatch = useDispatch();
 
@@ -54,6 +55,11 @@ function Home() {
   // const findProducts = products.filter((item) =>
   //   item.title.toLowerCase().includes(searchValue.toLowerCase())
   // ); для статичных не меняющихся массивов
+
+  const onChangePage = (number) => {
+    dispatch(setCurrentPage(number));
+  };
+
   return (
     <React.Fragment>
       <React.Fragment>
@@ -73,7 +79,7 @@ function Home() {
             <h3>Пицца не найдена</h3>
           )}
         </div>
-        <Pagination onChangePage={(number) => setCurrentPage(number)} />
+        <Pagination changePage={onChangePage} />
       </React.Fragment>
       <article className="about">
         <div>
