@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import qs from "qs";
+import { useNavigate } from "react-router-dom";
 
 import Types from "../components/Types.jsx";
 import Sort from "../components/Sort.jsx";
@@ -9,7 +11,11 @@ import Pagination from "../components/Pagination/index.jsx";
 
 import ProductsAPI from "../dal/ProductsAPI.js";
 import { SearchContext } from "../App.js";
-import { setCurrentPage, setTypeId } from "../redux/slices/filterSlice.js";
+import {
+  setCurrentPage,
+  setTypeId,
+  setFilters,
+} from "../redux/slices/filterSlice.js";
 
 function Home() {
   const [products, setProducts] = React.useState([]);
@@ -19,31 +25,37 @@ function Home() {
   );
   const { searchValue } = React.useContext(SearchContext);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isFiltered = React.useRef(false);
+  const isMounted = React.useRef(false);
 
+  //Если был первый рендер, проверяем параметры и сохраняем в redux
   React.useEffect(() => {
-    let response = null;
+    if (window.location.search) {
+      let params = qs.parse(window.location.search.substring(1));
+      dispatch(setFilters({ ...params }));
+      isFiltered.current = true;
+    }
+  }, [dispatch]);
 
+  //Если был первый рендер, то запрашиваем строку с параметрами, в противном случае
+  //запрашиваем все с нуля
+  React.useEffect(() => {
     try {
-      SetIsLoading(true);
-      (async () => {
-        if (typeId) {
-          response = await ProductsAPI.getProductsByTypeId(
+      if (!isFiltered.current) {
+        SetIsLoading(true);
+        (async () => {
+          let response = await ProductsAPI.getProducts(
             typeId,
             selectedSort,
             searchValue,
             currentPage
           );
-        } else {
-          response = await ProductsAPI.getProducts(
-            selectedSort,
-            searchValue,
-            currentPage
-          );
-        }
-
-        setProducts(response.data);
-        SetIsLoading(false);
-      })();
+          setProducts(response.data);
+          SetIsLoading(false);
+        })();
+      }
+      isFiltered.current = false;
     } catch (error) {
       window.alert("Ошибка загрузки данных.");
       console.log(error.message);
@@ -51,6 +63,19 @@ function Home() {
       window.scrollTo(0, 0);
     }
   }, [typeId, selectedSort, searchValue, currentPage]);
+
+  //Если в первый раз загрузилось приложение, то параметры не отображены
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        selectedSort,
+        typeId,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [typeId, selectedSort, currentPage, navigate]);
 
   // const findProducts = products.filter((item) =>
   //   item.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -79,7 +104,7 @@ function Home() {
             <h3>Пицца не найдена</h3>
           )}
         </div>
-        <Pagination changePage={onChangePage} />
+        <Pagination selectedPage={currentPage} changePage={onChangePage} />
       </React.Fragment>
       <article className="about">
         <div>

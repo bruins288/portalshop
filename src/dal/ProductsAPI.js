@@ -16,18 +16,16 @@ class ProductsAPI {
   #getTypedSort(sortedType) {
     return sortedType === "rating" ? "desc" : "asc";
   }
-  getProducts(sortedType, searchValue, currentPage) {
+  #getProductsByTypeId(typeId) {
+    return typeId === 0 ? "" : `&typeId=${typeId}`;
+  }
+  getProducts(id, sortedType, searchValue, currentPage) {
     return this.instance.get(
       `pizzas?_page=${currentPage}&_limit=8&_sort=${sortedType}&_order=${this.#getTypedSort(
         sortedType
-      )}&title_like=${searchValue}`
-    );
-  }
-  getProductsByTypeId(id, sortedType, searchValue, currentPage) {
-    return this.instance.get(
-      `pizzas?typeId=${id}&_page=${currentPage}&_limit=8&_sort=${sortedType}&_order=${this.#getTypedSort(
-        sortedType
-      )}&title_like=${searchValue}`
+      )}${this.#getProductsByTypeId(id)}${
+        searchValue && `&title_like=${searchValue}`
+      }`
     );
   }
 }
