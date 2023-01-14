@@ -3,10 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   typeId: 0,
   selectedSort: "rating",
+  searchValue: "",
   currentPage: 1,
 };
 
-export const filterSlice = createSlice({
+export const filtersSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
@@ -24,10 +25,20 @@ export const filterSlice = createSlice({
       state.selectedSort = action.payload.selectedSort;
       state.typeId = Number(action.payload.typeId);
     },
+    setSearchValue: (state, action) => {
+      state.searchValue = action.payload;
+    },
   },
 });
 
-export const { setTypeId, setSelectedSort, setCurrentPage, setFilters } =
-  filterSlice.actions;
+export const selectorFiltersSort = (state) => state.filters.selectedSort;
 
-export default filterSlice.reducer;
+export const {
+  setTypeId,
+  setSelectedSort,
+  setCurrentPage,
+  setFilters,
+  setSearchValue,
+} = filtersSlice.actions;
+
+export default filtersSlice.reducer;

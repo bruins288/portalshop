@@ -28,6 +28,15 @@ class ProductsAPI {
       }`
     );
   }
+  getProductsBySearch(id, sortedType, searchValue) {
+    return this.instance.get(
+      `pizzas?_sort=${sortedType}&_order=${this.#getTypedSort(
+        sortedType
+      )}${this.#getProductsByTypeId(id)}${
+        searchValue && `&title_like=${searchValue}`
+      }`
+    );
+  }
 }
 
 export default new ProductsAPI();

@@ -9,21 +9,20 @@ import Card from "../components/Card";
 import Skeleton from "../components/Card/Skeleton.jsx";
 import Pagination from "../components/Pagination/index.jsx";
 
-import ProductsAPI from "../dal/ProductsAPI.js";
-import { SearchContext } from "../App.js";
 import {
   setCurrentPage,
   setTypeId,
   setFilters,
-} from "../redux/slices/filterSlice.js";
+} from "../redux/slices/filtersSlice.js";
+import { fetchProducts } from "../redux/slices/productSlice.js";
+import { LOADING, SUCCESS, ERROR } from "../constants.js";
 
 function Home() {
-  const [products, setProducts] = React.useState([]);
-  const [isLoading, SetIsLoading] = React.useState(false);
-  const { typeId, selectedSort, currentPage } = useSelector(
-    (state) => state.filter
+  const { items, status } = useSelector((state) => state.product);
+  const { typeId, selectedSort, currentPage, searchValue } = useSelector(
+    (state) => state.filters
   );
-  const { searchValue } = React.useContext(SearchContext);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isFiltered = React.useRef(false);
@@ -41,28 +40,14 @@ function Home() {
   //Если был первый рендер, то запрашиваем строку с параметрами, в противном случае
   //запрашиваем все с нуля
   React.useEffect(() => {
-    try {
-      if (!isFiltered.current) {
-        SetIsLoading(true);
-        (async () => {
-          let response = await ProductsAPI.getProducts(
-            typeId,
-            selectedSort,
-            searchValue,
-            currentPage
-          );
-          setProducts(response.data);
-          SetIsLoading(false);
-        })();
-      }
-      isFiltered.current = false;
-    } catch (error) {
-      window.alert("Ошибка загрузки данных.");
-      console.log(error.message);
-    } finally {
-      window.scrollTo(0, 0);
+    if (!isFiltered.current) {
+      dispatch(
+        fetchProducts({ typeId, selectedSort, searchValue, currentPage })
+      );
     }
-  }, [typeId, selectedSort, searchValue, currentPage]);
+    isFiltered.current = false;
+    window.scrollTo(0, 0);
+  }, [typeId, selectedSort, searchValue, currentPage, dispatch]);
 
   //Если в первый раз загрузилось приложение, то параметры не отображены
   React.useEffect(() => {
@@ -94,12 +79,13 @@ function Home() {
         </div>
         <div className="content__title">
           <h1>В наличие</h1>
+          {status === ERROR && <h2>Ошибка загрузки данных</h2>}
         </div>
         <div className="content__items">
-          {isLoading ? (
-            [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-          ) : products.length ? (
-            products.map((item) => <Card key={item.id} {...item} />)
+          {status === LOADING ? (
+            [...new Array(4)].map((_, index) => <Skeleton key={index} />)
+          ) : status === SUCCESS && items.length > 0 ? (
+            items.map((item) => <Card key={item.id} {...item} />)
           ) : (
             <h3>Пицца не найдена</h3>
           )}

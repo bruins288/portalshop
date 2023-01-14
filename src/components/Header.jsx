@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Search from "./Search";
+import { selectorCart } from "../redux/slices/cartSlice.js";
 
 function Header() {
+  const { totalPrice, totalCount } = useSelector(selectorCart);
+
   return (
     <header className="header">
       <div className="container">
@@ -19,7 +23,7 @@ function Header() {
         <Search />
         <div className="header__cart">
           <Link to="/Cart">
-            <span>520 ₽</span>
+            <span>{totalPrice} ₽</span>
             <button className="button-header">
               <svg width="24" height="21" fill="none" viewBox="0 0 24 21">
                 <path
@@ -29,7 +33,7 @@ function Header() {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              <span>3</span>
+              <span>{totalCount}</span>
             </button>
           </Link>
         </div>

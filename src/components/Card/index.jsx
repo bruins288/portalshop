@@ -1,9 +1,36 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-function Card({ imageUrl, title, description, price, methods, sizes }) {
-  const methodNames = ["тонкое", "традиционное"];
+import { addProduct } from "../../redux/slices/cartSlice.js";
+
+const methodNames = ["тонкое", "традиционное"];
+
+function Card({ id, imageUrl, title, description, price, methods, sizes }) {
   const [activeMethod, setActiveMethod] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
+
+  const dispatch = useDispatch();
+  const addedToCart = useSelector((state) =>
+    state.cart.products.reduce((sum, item) => {
+      if (item.id === id) {
+        sum += item.count;
+      }
+      return sum;
+    }, 0)
+  );
+
+  const handleClickAdd = () => {
+    let product = {
+      id,
+      imageUrl,
+      title,
+      price,
+      method: methodNames[activeMethod],
+      size: sizes[activeSize],
+      add: 1,
+    };
+    dispatch(addProduct(product));
+  };
 
   return (
     <div className="pizza-card">
@@ -41,7 +68,10 @@ function Card({ imageUrl, title, description, price, methods, sizes }) {
         </ul>
       </div>
       <div className="pizza-card__bottom">
-        <button className="button button--outline button--add">
+        <button
+          className="button button--outline button--add"
+          onClick={handleClickAdd}
+        >
           <svg
             width="12"
             height="12"
@@ -55,7 +85,7 @@ function Card({ imageUrl, title, description, price, methods, sizes }) {
             />
           </svg>
           <span>Добавить</span>
-          <i>{0}</i>
+          {addedToCart > 0 && <i>{addedToCart}</i>}
         </button>
         <div className="pizza-card__price">от {price} ₽</div>
       </div>

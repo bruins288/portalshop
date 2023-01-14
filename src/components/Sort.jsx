@@ -1,7 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setSelectedSort } from "../redux/slices/filterSlice.js";
+import {
+  setSelectedSort,
+  selectorFiltersSort,
+} from "../redux/slices/filtersSlice.js";
 
 const list = [
   { name: "популярности", sortedType: "rating" },
@@ -11,8 +14,19 @@ const list = [
 
 function Sort() {
   const [isVisiblePopup, setIsVisiblePopup] = React.useState(false);
-  const selected = useSelector((state) => state.filter.selectedSort);
+  const selected = useSelector(selectorFiltersSort);
   const dispatch = useDispatch();
+  const selectedRef = React.useRef();
+
+  React.useEffect(() => {
+    const closePopup = (e) => {
+      if (!e.path.includes(selectedRef.current)) {
+        setIsVisiblePopup(false);
+      }
+    };
+    document.body.addEventListener("click", closePopup);
+    return () => document.body.removeEventListener("click", closePopup);
+  }, []);
 
   const handleToggleSort = (sortedType) => {
     dispatch(setSelectedSort(sortedType));
@@ -20,7 +34,7 @@ function Sort() {
   };
 
   return (
-    <div className="sort">
+    <div className="sort" ref={selectedRef}>
       <div
         className="sort__label"
         onClick={() => setIsVisiblePopup(!isVisiblePopup)}
