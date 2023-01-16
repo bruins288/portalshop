@@ -37,6 +37,9 @@ class ProductsAPI {
       }`
     );
   }
+  getProductById(id) {
+    return this.instance.get(`pizzas/${id}`);
+  }
 }
 
 export default new ProductsAPI();

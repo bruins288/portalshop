@@ -5,6 +5,7 @@ import { LOADING, SUCCESS, ERROR } from "../../constants.js";
 
 const initialState = {
   items: [],
+  item: {},
   status: LOADING,
   totalPages: 0,
 };
@@ -15,11 +16,18 @@ export const fetchProducts = createAsyncThunk(
     const { typeId, selectedSort, searchValue, currentPage } = params;
     let response = await ProductsAPI.getProducts(
       typeId,
-      selectedSort,
+      selectedSort.sortedType,
       searchValue,
       currentPage
     );
 
+    return response.data;
+  }
+);
+export const fetchProductById = createAsyncThunk(
+  "products/fetchProductByIdStatus",
+  async (id) => {
+    let response = await ProductsAPI.getProductById(id);
     return response.data;
   }
 );
@@ -40,13 +48,27 @@ export const productSlice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.items = action.payload;
       state.status = SUCCESS;
+      state.totalPages = Math.floor(action.payload.length / 8);
     });
     builder.addCase(fetchProducts.rejected, (state) => {
       state.status = ERROR;
-      state.items = [];
+    });
+    builder.addCase(fetchProductById.pending, (state) => {
+      state.status = LOADING;
+      state.item = {};
+    });
+    builder.addCase(fetchProductById.fulfilled, (state, action) => {
+      state.item = action.payload;
+      state.status = SUCCESS;
+    });
+    builder.addCase(fetchProductById.rejected, (state) => {
+      state.status = ERROR;
+      state.item = {};
     });
   },
 });
+
+export const selectorProduct = (state) => state.product;
 
 export const { setItems } = productSlice.actions;
 

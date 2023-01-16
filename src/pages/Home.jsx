@@ -3,22 +3,25 @@ import { useSelector, useDispatch } from "react-redux";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 
-import Types from "../components/Types.jsx";
-import Sort from "../components/Sort.jsx";
+import Types from "../components/Types";
+import Sort from "../components/Sort";
 import Card from "../components/Card";
-import Skeleton from "../components/Card/Skeleton.jsx";
-import Pagination from "../components/Pagination/index.jsx";
+import Skeleton from "../components/Card/Skeleton";
+import Pagination from "../components/Pagination";
 
 import {
   setCurrentPage,
   setTypeId,
   setFilters,
 } from "../redux/slices/filtersSlice.js";
-import { fetchProducts } from "../redux/slices/productSlice.js";
+import {
+  fetchProducts,
+  selectorProduct,
+} from "../redux/slices/productSlice.js";
 import { LOADING, SUCCESS, ERROR } from "../constants.js";
 
 function Home() {
-  const { items, status } = useSelector((state) => state.product);
+  const { items, status } = useSelector(selectorProduct);
   const { typeId, selectedSort, currentPage, searchValue } = useSelector(
     (state) => state.filters
   );
@@ -90,7 +93,9 @@ function Home() {
             <h3>Пицца не найдена</h3>
           )}
         </div>
-        <Pagination selectedPage={currentPage} changePage={onChangePage} />
+        {status === SUCCESS && (
+          <Pagination selectedPage={currentPage} changePage={onChangePage} />
+        )}
       </React.Fragment>
       <article className="about">
         <div>

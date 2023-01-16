@@ -2,7 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   typeId: 0,
-  selectedSort: "rating",
+  selectedSort: {
+    name: "популярности",
+    sortedType: "rating",
+  },
   searchValue: "",
   currentPage: 1,
 };

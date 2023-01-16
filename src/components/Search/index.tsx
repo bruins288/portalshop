@@ -8,22 +8,22 @@ import { setSearchValue } from "../../redux/slices/filtersSlice.js";
 function Search() {
   const [inputValue, setInputValue] = React.useState("");
   const dispatch = useDispatch();
-  const searchInputRef = React.useRef();
+  const searchInputRef = React.useRef<HTMLInputElement>(null);
 
   const clearSearch = () => {
     setInputValue("");
     dispatch(setSearchValue(""));
-    searchInputRef.current.focus();
+    searchInputRef.current?.focus();
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateSearchValue = React.useCallback(
-    debounce((str) => {
+    debounce((str: string) => {
       dispatch(setSearchValue(str));
     }, 300),
     []
   );
 
-  const changeSearch = (str) => {
+  const changeSearch = (str: string) => {
     setInputValue(str);
     updateSearchValue(str);
   };

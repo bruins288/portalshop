@@ -9,7 +9,7 @@ const types = [
   "Закрытые",
 ];
 
-function Types({ id, clickType }) {
+const Types: React.FC<TypeProps> = ({ id, clickType }) => {
   return (
     <div className="types">
       <menu>
@@ -25,6 +25,6 @@ function Types({ id, clickType }) {
       </menu>
     </div>
   );
-}
+};
 
 export default Types;

@@ -1,17 +1,26 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { addProduct } from "../../redux/slices/cartSlice.js";
 
 const methodNames = ["тонкое", "традиционное"];
 
-function Card({ id, imageUrl, title, description, price, methods, sizes }) {
-  const [activeMethod, setActiveMethod] = React.useState(0);
-  const [activeSize, setActiveSize] = React.useState(0);
+const Card: React.FC<TypeCard> = ({
+  id,
+  imageUrl,
+  title,
+  description,
+  price,
+  methods,
+  sizes,
+}) => {
+  const [activeMethod, setActiveMethod] = React.useState<number>(0);
+  const [activeSize, setActiveSize] = React.useState<number>(0);
 
   const dispatch = useDispatch();
-  const addedToCart = useSelector((state) =>
-    state.cart.products.reduce((sum, item) => {
+  const addedToCart = useSelector((state: any) =>
+    state.cart.products.reduce((sum: number, item: any) => {
       if (item.id === id) {
         sum += item.count;
       }
@@ -34,37 +43,41 @@ function Card({ id, imageUrl, title, description, price, methods, sizes }) {
 
   return (
     <div className="pizza-card">
-      <img className="pizza-card__img" src={imageUrl} alt="pizza" />
+      <Link to={`/Product/${id}`}>
+        <img className="pizza-card__img" src={imageUrl} alt="pizza" />
+      </Link>
       <div className="pizza-card__title">
         <h4>{title}</h4>
         <p>{description}</p>
       </div>
       <div className="pizza-card__selector">
         <ul>
-          {methods.map((method) => (
-            <li
-              key={method}
-              className={
-                activeMethod === method && methods.length > 1 ? "active" : ""
-              }
-              onClick={() => setActiveMethod(method)}
-            >
-              {methodNames[method]}
-            </li>
-          ))}
+          {methods &&
+            methods.map((method) => (
+              <li
+                key={method}
+                className={
+                  activeMethod === method && methods.length > 1 ? "active" : ""
+                }
+                onClick={() => setActiveMethod(method)}
+              >
+                {methodNames[method]}
+              </li>
+            ))}
         </ul>
         <ul>
-          {sizes.map((size, index) => (
-            <li
-              key={index}
-              className={
-                activeSize === index && sizes.length > 1 ? "active" : ""
-              }
-              onClick={() => setActiveSize(index)}
-            >
-              {size} см.
-            </li>
-          ))}
+          {sizes &&
+            sizes.map((size, index) => (
+              <li
+                key={index}
+                className={
+                  activeSize === index && sizes.length > 1 ? "active" : ""
+                }
+                onClick={() => setActiveSize(index)}
+              >
+                {size} см.
+              </li>
+            ))}
         </ul>
       </div>
       <div className="pizza-card__bottom">
@@ -91,6 +104,6 @@ function Card({ id, imageUrl, title, description, price, methods, sizes }) {
       </div>
     </div>
   );
-}
+};
 
 export default Card;

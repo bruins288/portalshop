@@ -37,4 +37,7 @@
   &:focus {
     border: 3px solid $red;
   }
+  @media (max-width: 414px) {
+    max-width: 220px;
+  }
 }

@@ -39,91 +39,166 @@ body {
     @media (max-width: 1110px) {
       @include flex-content-center;
     }
+  }
+  &__cart {
+    max-width: 820px;
+    margin: 90px auto;
+  }
+  &__info {
+    @include flex-content-center;
+    h2 {
+      cursor: pointer;
+      text-decoration: dotted;
+    }
     .pizza-card {
-      max-width: 275px;
-      margin-bottom: 50px;
-      border: 1px solid $gray;
-      border-radius: 10px;
-      box-sizing: content-box;
-      padding: 10px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-      margin-right: 30px;
+      max-width: 450px;
       @media (max-width: 414px) {
         box-sizing: border-box;
+        margin: 0 5px;
         img {
           width: 230px;
         }
       }
       &__img {
-        width: 275px;
+        width: 450px;
       }
       &__title {
-        height: 87px;
-        margin-bottom: 12px;
+        margin-bottom: 40px;
         h4 {
-          font-size: 20px;
-          font-weight: bold;
-          line-height: 24px;
-          color: $colorNameItem;
-          text-align: center;
+          font-size: 30px;
+          margin-bottom: 10px;
         }
         p {
           line-height: 20px;
-          max-height: 137px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
+          font-size: 20px;
+          display: inline-block;
+          -webkit-line-clamp: 5;
           -webkit-box-orient: vertical;
+        }
+        @media (max-width: 414px) {
+          margin-bottom: 2px;
+          h4 {
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 24px;
+            color: $colorNameItem;
+            text-align: center;
+          }
+          p {
+            line-height: 20px;
+            max-height: 137px;
+            overflow: hidden;
+            font-size: 16px;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+          }
         }
       }
       &__selector {
-        @include flex-direction-column;
-        background-color: $background;
-        border-radius: 10px;
-        padding: 6px;
         ul {
-          display: flex;
-          flex: 1;
-          &:first-of-type {
-            margin-bottom: 6px;
-          }
           li {
-            padding: 8px;
-            flex: 1;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            @include noselect();
-            text-align: center;
-            &.active {
-              background: $colorSelector;
-              box-shadow: 0px 2px 4px rgba(196, 196, 196, 0.4);
-              border-radius: 5px;
-              cursor: auto;
+            font-size: 16px;
+          }
+        }
+        @media (max-width: 414px) {
+          ul {
+            li {
+              font-size: 14px;
             }
           }
         }
       }
-      &__bottom {
-        @include flex-content-between;
-        align-items: center;
-        margin-top: 20px;
-      }
       &__price {
-        font-weight: bold;
-        font-size: 22px;
-        line-height: 27px;
-        letter-spacing: 0.015em;
+        font-size: 24px;
         @media (max-width: 414px) {
           font-size: 16px;
         }
       }
     }
   }
-  &__cart {
-    max-width: 820px;
-    margin: 90px auto;
+}
+.pizza-card {
+  max-width: 275px;
+  margin-bottom: 50px;
+  border: 1px solid $gray;
+  border-radius: 10px;
+  box-sizing: content-box;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  margin-right: 30px;
+  @media (max-width: 414px) {
+    box-sizing: border-box;
+    img {
+      width: 230px;
+    }
+  }
+  &__img {
+    width: 275px;
+  }
+  &__title {
+    height: 87px;
+    margin-bottom: 30px;
+    h4 {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 24px;
+      color: $colorNameItem;
+      text-align: center;
+    }
+    p {
+      line-height: 20px;
+      max-height: 137px;
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+  &__selector {
+    @include flex-direction-column;
+    background-color: $background;
+    border-radius: 10px;
+    padding: 6px;
+    ul {
+      display: flex;
+      flex: 1;
+      &:first-of-type {
+        margin-bottom: 6px;
+      }
+      li {
+        padding: 8px;
+        flex: 1;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        @include noselect();
+        text-align: center;
+        &.active {
+          background: $colorSelector;
+          box-shadow: 0px 2px 4px rgba(196, 196, 196, 0.4);
+          border-radius: 5px;
+          cursor: auto;
+        }
+      }
+    }
+  }
+  &__bottom {
+    @include flex-content-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  &__price {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: 0.015em;
+    @media (max-width: 414px) {
+      font-size: 16px;
+    }
   }
 }
 .cart {

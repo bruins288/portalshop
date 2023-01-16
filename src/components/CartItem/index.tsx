@@ -4,9 +4,22 @@ import { useDispatch } from "react-redux";
 import styles from "./CartItem.module.scss";
 import { addProduct, removeProduct } from "../../redux/slices/cartSlice";
 
-function CartItem({ id, imageUrl, title, price, method, size, count }) {
+const CartItem: React.FC<TypeCartItem> = ({
+  id,
+  imageUrl,
+  title,
+  price,
+  method,
+  size,
+  count,
+}) => {
   const dispatch = useDispatch();
-  const handleProduct = (id, method, size, add) => {
+  const handleProduct = (
+    id: number,
+    method: string,
+    size: number,
+    add: number
+  ) => {
     dispatch(
       addProduct({
         id,
@@ -16,7 +29,7 @@ function CartItem({ id, imageUrl, title, price, method, size, count }) {
       })
     );
   };
-  const handleRemoveProducts = (id, method, size) => {
+  const handleRemoveProducts = (id: number, method: string, size: number) => {
     dispatch(
       removeProduct({
         id,
@@ -106,6 +119,6 @@ function CartItem({ id, imageUrl, title, price, method, size, count }) {
       </div>
     </div>
   );
-}
+};
 
 export default CartItem;

@@ -6,7 +6,7 @@ import {
   selectorFiltersSort,
 } from "../redux/slices/filtersSlice.js";
 
-const list = [
+const list: TypeSort[] = [
   { name: "популярности", sortedType: "rating" },
   { name: "цене", sortedType: "price" },
   { name: "алфавиту", sortedType: "title" },
@@ -16,10 +16,10 @@ function Sort() {
   const [isVisiblePopup, setIsVisiblePopup] = React.useState(false);
   const selected = useSelector(selectorFiltersSort);
   const dispatch = useDispatch();
-  const selectedRef = React.useRef();
+  const selectedRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const closePopup = (e) => {
+    const closePopup = (e: any) => {
       if (!e.path.includes(selectedRef.current)) {
         setIsVisiblePopup(false);
       }
@@ -28,7 +28,7 @@ function Sort() {
     return () => document.body.removeEventListener("click", closePopup);
   }, []);
 
-  const handleToggleSort = (sortedType) => {
+  const handleToggleSort = (sortedType: TypeSort) => {
     dispatch(setSelectedSort(sortedType));
     setIsVisiblePopup(!isVisiblePopup);
   };
@@ -46,7 +46,7 @@ function Sort() {
           ></path>
         </svg>
         <b>Сортировка по:</b>
-        <span>{list.find((item) => item.sortedType === selected).name}</span>
+        <span>{selected.name}</span>
       </div>
       {isVisiblePopup && (
         <div className="sort__popup">
@@ -54,8 +54,10 @@ function Sort() {
             {list.map((item, index) => (
               <li
                 key={index}
-                className={selected === item.sortedType ? "active" : ""}
-                onClick={() => handleToggleSort(item.sortedType)}
+                className={
+                  selected.sortedType === item.sortedType ? "active" : ""
+                }
+                onClick={() => handleToggleSort(item)}
               >
                 {item.name}
               </li>
