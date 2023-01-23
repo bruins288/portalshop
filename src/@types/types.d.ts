@@ -1,12 +1,8 @@
-type TypeSort = {
+type SortType = {
   name: string;
-  sortedType: string;
+  sortedType: "rating" | "price" | "title";
 };
-type TypeProps = {
-  id: number;
-  clickType: any;
-};
-type TypeCartItem = {
+type CartPropsType = {
   id: number;
   imageUrl: string;
   title: string;
@@ -15,11 +11,7 @@ type TypeCartItem = {
   size: number;
   count: number;
 };
-type TypePagination = {
-  selectedPage: number;
-  changePage: any;
-};
-type TypeCard = {
+type CardPropsType = {
   id: number;
   imageUrl: string;
   title: string;
@@ -27,4 +19,20 @@ type TypeCard = {
   price: number;
   methods: number[];
   sizes: number[];
+};
+type CartItemType = {
+  id: number;
+  imageUrl: string;
+  title: string;
+  price: number;
+  method: string;
+  size: number;
+  count: number;
+  add?: number;
+};
+type FetchProductType = {
+  typeId: number;
+  selectedSort: SortType;
+  searchValue: string;
+  currentPage: number;
 };

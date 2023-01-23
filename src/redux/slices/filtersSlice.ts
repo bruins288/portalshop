@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
-const initialState = {
+const initialState: IFiltersSlice = {
   typeId: 0,
   selectedSort: {
     name: "популярности",
@@ -14,27 +15,28 @@ export const filtersSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    setTypeId: (state, action) => {
+    setTypeId: (state, action: PayloadAction<number>) => {
       state.typeId = action.payload;
     },
-    setSelectedSort: (state, action) => {
+    setSelectedSort: (state, action: PayloadAction<SortType>) => {
       state.selectedSort = action.payload;
     },
-    setCurrentPage: (state, action) => {
+    setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
-    setFilters: (state, action) => {
+    setFilters: (state, action: PayloadAction<IFiltersSlice>) => {
       state.currentPage = Number(action.payload.currentPage);
       state.selectedSort = action.payload.selectedSort;
       state.typeId = Number(action.payload.typeId);
     },
-    setSearchValue: (state, action) => {
+    setSearchValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
     },
   },
 });
 
-export const selectorFiltersSort = (state) => state.filters.selectedSort;
+export const selectorFiltersSort = (state: RootState) =>
+  state.filters.selectedSort;
 
 export const {
   setTypeId,

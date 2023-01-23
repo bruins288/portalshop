@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import styles from "./CartItem.module.scss";
 import { addProduct, removeProduct } from "../../redux/slices/cartSlice";
 
-const CartItem: React.FC<TypeCartItem> = ({
+const CartItem: React.FC<CartPropsType> = ({
   id,
   imageUrl,
   title,
@@ -16,25 +16,45 @@ const CartItem: React.FC<TypeCartItem> = ({
   const dispatch = useDispatch();
   const handleProduct = (
     id: number,
+    imageUrl: string,
+    title: string,
+    price: number,
     method: string,
     size: number,
+    count: number,
     add: number
   ) => {
     dispatch(
       addProduct({
         id,
+        imageUrl,
+        title,
+        price,
         method,
         size,
+        count,
         add: add,
       })
     );
   };
-  const handleRemoveProducts = (id: number, method: string, size: number) => {
+  const handleRemoveProducts = (
+    id: number,
+    imageUrl: string,
+    title: string,
+    price: number,
+    method: string,
+    size: number,
+    count: number
+  ) => {
     dispatch(
       removeProduct({
         id,
+        imageUrl,
+        title,
+        price,
         method,
         size,
+        count,
       })
     );
   };
@@ -53,7 +73,9 @@ const CartItem: React.FC<TypeCartItem> = ({
       <div className={styles.items_count}>
         <button
           className="button-cart button-cart__change"
-          onClick={() => handleProduct(id, method, size, 0)}
+          onClick={() =>
+            handleProduct(id, imageUrl, title, price, method, size, count, 0)
+          }
         >
           <svg
             width="10"
@@ -71,7 +93,9 @@ const CartItem: React.FC<TypeCartItem> = ({
         <b>{count}</b>
         <button
           className="button-cart button-cart__change"
-          onClick={() => handleProduct(id, method, size, 1)}
+          onClick={() =>
+            handleProduct(id, imageUrl, title, price, method, size, count, 1)
+          }
         >
           <svg
             width="10"
@@ -97,7 +121,17 @@ const CartItem: React.FC<TypeCartItem> = ({
       <div className={styles.items_remove}>
         <button
           className="button-cart button-cart__remove"
-          onClick={() => handleRemoveProducts(id, method, size)}
+          onClick={() =>
+            handleRemoveProducts(
+              id,
+              imageUrl,
+              title,
+              price,
+              method,
+              size,
+              count
+            )
+          }
         >
           <svg
             width="10"

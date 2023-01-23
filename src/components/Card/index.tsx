@@ -2,11 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { addProduct } from "../../redux/slices/cartSlice.js";
+import { addProduct } from "../../redux/slices/cartSlice";
 
 const methodNames = ["тонкое", "традиционное"];
 
-const Card: React.FC<TypeCard> = ({
+const Card: React.FC<CardPropsType> = ({
   id,
   imageUrl,
   title,
@@ -29,13 +29,14 @@ const Card: React.FC<TypeCard> = ({
   );
 
   const handleClickAdd = () => {
-    let product = {
+    let product: CartItemType = {
       id,
       imageUrl,
       title,
       price,
       method: methodNames[activeMethod],
       size: sizes[activeSize],
+      count: 0,
       add: 1,
     };
     dispatch(addProduct(product));

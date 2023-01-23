@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   setSelectedSort,
   selectorFiltersSort,
-} from "../redux/slices/filtersSlice.js";
+} from "../redux/slices/filtersSlice";
 
-const list: TypeSort[] = [
+const list: SortType[] = [
   { name: "популярности", sortedType: "rating" },
   { name: "цене", sortedType: "price" },
   { name: "алфавиту", sortedType: "title" },
@@ -19,8 +19,11 @@ function Sort() {
   const selectedRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const closePopup = (e: any) => {
-      if (!e.path.includes(selectedRef.current)) {
+    const closePopup = (e: MouseEvent) => {
+      if (
+        selectedRef.current &&
+        !e.composedPath().includes(selectedRef.current)
+      ) {
         setIsVisiblePopup(false);
       }
     };
@@ -28,7 +31,7 @@ function Sort() {
     return () => document.body.removeEventListener("click", closePopup);
   }, []);
 
-  const handleToggleSort = (sortedType: TypeSort) => {
+  const handleToggleSort = (sortedType: SortType) => {
     dispatch(setSelectedSort(sortedType));
     setIsVisiblePopup(!isVisiblePopup);
   };

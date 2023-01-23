@@ -3,10 +3,10 @@ import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
 
 import styles from "./Search.module.scss";
-import { setSearchValue } from "../../redux/slices/filtersSlice.js";
+import { setSearchValue } from "../../redux/slices/filtersSlice";
 
 function Search() {
-  const [inputValue, setInputValue] = React.useState("");
+  const [inputValue, setInputValue] = React.useState<string>("");
   const dispatch = useDispatch();
   const searchInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -50,7 +50,9 @@ function Search() {
         className={styles.search}
         type="text"
         placeholder="Поиск пиццы...."
-        onChange={(e) => changeSearch(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          changeSearch(e.target.value)
+        }
         value={inputValue}
       />
       {inputValue && (

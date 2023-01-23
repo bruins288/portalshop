@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import logo from "../assets/img/logo.png";
 import Search from "./Search";
-import { selectorCart } from "../redux/slices/cartSlice.js";
+import { selectorCart } from "../redux/slices/cartSlice";
 
 function Header() {
   const { totalPrice, totalCount } = useSelector(selectorCart);

@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 
@@ -13,20 +13,18 @@ import {
   setCurrentPage,
   setTypeId,
   setFilters,
-} from "../redux/slices/filtersSlice.js";
-import {
-  fetchProducts,
-  selectorProduct,
-} from "../redux/slices/productSlice.js";
-import { LOADING, SUCCESS, ERROR } from "../constants.js";
+} from "../redux/slices/filtersSlice";
+import { fetchProducts, selectorProduct } from "../redux/slices/productSlice";
+import { useAppDispatch } from "../redux/store";
+import { Status } from "../redux/slices/productSlice";
 
 function Home() {
   const { items, status } = useSelector(selectorProduct);
   const { typeId, selectedSort, currentPage, searchValue } = useSelector(
-    (state) => state.filters
+    (state: any) => state.filters
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isFiltered = React.useRef(false);
   const isMounted = React.useRef(false);
@@ -34,7 +32,9 @@ function Home() {
   //Если был первый рендер, проверяем параметры и сохраняем в redux
   React.useEffect(() => {
     if (window.location.search) {
-      let params = qs.parse(window.location.search.substring(1));
+      let params = qs.parse(
+        window.location.search.substring(1)
+      ) as unknown as IFiltersSlice;
       dispatch(setFilters({ ...params }));
       isFiltered.current = true;
     }
@@ -45,7 +45,12 @@ function Home() {
   React.useEffect(() => {
     if (!isFiltered.current) {
       dispatch(
-        fetchProducts({ typeId, selectedSort, searchValue, currentPage })
+        fetchProducts({
+          typeId,
+          selectedSort,
+          searchValue,
+          currentPage,
+        })
       );
     }
     isFiltered.current = false;
@@ -69,7 +74,7 @@ function Home() {
   //   item.title.toLowerCase().includes(searchValue.toLowerCase())
   // ); для статичных не меняющихся массивов
 
-  const onChangePage = (number) => {
+  const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
   };
 
@@ -77,23 +82,26 @@ function Home() {
     <React.Fragment>
       <React.Fragment>
         <div className="content__top">
-          <Types id={typeId} clickType={(id) => dispatch(setTypeId(id))} />
+          <Types
+            id={typeId}
+            clickType={(id: number) => dispatch(setTypeId(id))}
+          />
           <Sort />
         </div>
         <div className="content__title">
           <h1>В наличие</h1>
-          {status === ERROR && <h2>Ошибка загрузки данных</h2>}
+          {status === Status.ERROR && <h2>Ошибка загрузки данных</h2>}
         </div>
         <div className="content__items">
-          {status === LOADING ? (
+          {status === Status.LOADING ? (
             [...new Array(4)].map((_, index) => <Skeleton key={index} />)
-          ) : status === SUCCESS && items.length > 0 ? (
-            items.map((item) => <Card key={item.id} {...item} />)
+          ) : status === Status.SUCCESS && items.length > 0 ? (
+            items.map((item: any) => <Card key={item.id} {...item} />)
           ) : (
             <h3>Пицца не найдена</h3>
           )}
         </div>
-        {status === SUCCESS && (
+        {status === Status.SUCCESS && (
           <Pagination selectedPage={currentPage} changePage={onChangePage} />
         )}
       </React.Fragment>

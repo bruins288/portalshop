@@ -9,7 +9,7 @@ const types = [
   "Закрытые",
 ];
 
-const Types: React.FC<TypeProps> = ({ id, clickType }) => {
+const Types: React.FC<ITypeProps> = ({ id, clickType }) => {
   return (
     <div className="types">
       <menu>

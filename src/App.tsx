@@ -4,7 +4,7 @@ import MainLayout from "./Layouts/MainLayout";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
-import ProductInfo from "./pages/ProductInfo.jsx";
+import ProductInfo from "./pages/ProductInfo";
 
 import "./App.scss";
 

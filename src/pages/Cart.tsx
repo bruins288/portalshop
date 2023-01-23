@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import CartItem from "../components/CartItem";
 import CartEmpty from "../components/CartEmpty";
-import { clearProducts, selectorCart } from "../redux/slices/cartSlice.js";
+import { clearProducts, selectorCart } from "../redux/slices/cartSlice";
 
 function Cart() {
   const { totalPrice, totalCount, products } = useSelector(selectorCart);
@@ -71,7 +71,7 @@ function Cart() {
           <div className="cart__container">
             {products.length ? (
               products.map(
-                (product, index) =>
+                (product: any, index: number) =>
                   product.count > 0 && <CartItem key={index} {...product} />
               )
             ) : (

@@ -1,35 +1,36 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import Skeleton from "../components/Card/Skeleton.tsx";
+import Skeleton from "../components/Card/Skeleton";
 import Card from "../components/Card";
 import {
   fetchProductById,
   selectorProduct,
-} from "../redux/slices/productSlice.js";
-import { LOADING, SUCCESS, ERROR } from "../constants.js";
+} from "../redux/slices/productSlice";
+import { useAppDispatch } from "../redux/store";
+import { Status } from "../redux/slices/productSlice";
 
 function ProductInfo() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { item, status } = useSelector(selectorProduct);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    dispatch(fetchProductById(id));
+    dispatch(fetchProductById(Number(id)));
   }, [id, dispatch]);
 
   return (
     <div className="content__info">
-      {status === ERROR ? (
+      {status === Status.ERROR ? (
         <h2 onClick={() => navigate("/")}>
           Ошибка загрузки данных или товар не найден...
         </h2>
-      ) : status === LOADING ? (
+      ) : status === Status.LOADING ? (
         <Skeleton />
       ) : (
-        status === SUCCESS && <Card {...item} />
+        status === Status.SUCCESS && <Card {...item} />
       )}
     </div>
   );
