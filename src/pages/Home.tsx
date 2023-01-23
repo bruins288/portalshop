@@ -13,6 +13,7 @@ import {
   setCurrentPage,
   setTypeId,
   setFilters,
+  selectorFilters,
 } from "../redux/slices/filtersSlice";
 import { fetchProducts, selectorProduct } from "../redux/slices/productSlice";
 import { useAppDispatch } from "../redux/store";
@@ -20,9 +21,8 @@ import { Status } from "../redux/slices/productSlice";
 
 function Home() {
   const { items, status } = useSelector(selectorProduct);
-  const { typeId, selectedSort, currentPage, searchValue } = useSelector(
-    (state: any) => state.filters
-  );
+  const { typeId, selectedSort, currentPage, searchValue } =
+    useSelector(selectorFilters);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -78,15 +78,19 @@ function Home() {
     dispatch(setCurrentPage(number));
   };
 
+  const onChangeType = React.useCallback(
+    (id: number) => {
+      dispatch(setTypeId(id));
+    },
+    [dispatch]
+  );
+
   return (
     <React.Fragment>
       <React.Fragment>
         <div className="content__top">
-          <Types
-            id={typeId}
-            clickType={(id: number) => dispatch(setTypeId(id))}
-          />
-          <Sort />
+          <Types id={typeId} clickType={onChangeType} />
+          <Sort selectedSort={selectedSort} />
         </div>
         <div className="content__title">
           <h1>В наличие</h1>

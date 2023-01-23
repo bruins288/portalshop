@@ -27,4 +27,4 @@ const Types: React.FC<ITypeProps> = ({ id, clickType }) => {
   );
 };
 
-export default Types;
+export default React.memo(Types);

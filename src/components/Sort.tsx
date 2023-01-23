@@ -1,10 +1,7 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import {
-  setSelectedSort,
-  selectorFiltersSort,
-} from "../redux/slices/filtersSlice";
+import { setSelectedSort } from "../redux/slices/filtersSlice";
 
 const list: SortType[] = [
   { name: "популярности", sortedType: "rating" },
@@ -12,9 +9,9 @@ const list: SortType[] = [
   { name: "алфавиту", sortedType: "title" },
 ];
 
-function Sort() {
+const Sort: React.FC<ISortProps> = ({ selectedSort }) => {
   const [isVisiblePopup, setIsVisiblePopup] = React.useState(false);
-  const selected = useSelector(selectorFiltersSort);
+  //const { selectedSort } = useSelector(selectorFilters);
   const dispatch = useDispatch();
   const selectedRef = React.useRef<HTMLDivElement>(null);
 
@@ -49,7 +46,7 @@ function Sort() {
           ></path>
         </svg>
         <b>Сортировка по:</b>
-        <span>{selected.name}</span>
+        <span>{selectedSort.name}</span>
       </div>
       {isVisiblePopup && (
         <div className="sort__popup">
@@ -58,7 +55,7 @@ function Sort() {
               <li
                 key={index}
                 className={
-                  selected.sortedType === item.sortedType ? "active" : ""
+                  selectedSort.sortedType === item.sortedType ? "active" : ""
                 }
                 onClick={() => handleToggleSort(item)}
               >
@@ -70,6 +67,5 @@ function Sort() {
       )}
     </div>
   );
-}
-
-export default Sort;
+};
+export default React.memo(Sort);

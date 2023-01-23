@@ -23,3 +23,6 @@ interface IProductSlice {
   status: Status;
   totalPages: number;
 }
+interface ISortProps {
+  selectedSort: SortType;
+}
