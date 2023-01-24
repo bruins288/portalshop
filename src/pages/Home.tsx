@@ -3,11 +3,7 @@ import { useSelector } from "react-redux";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 
-import Types from "../components/Types";
-import Sort from "../components/Sort";
-import Card from "../components/Card";
-import Skeleton from "../components/Card/Skeleton";
-import Pagination from "../components/Pagination";
+import { Types, Sort, Card, Skeleton, Pagination } from "../components";
 
 import {
   setCurrentPage,

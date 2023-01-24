@@ -19,6 +19,7 @@ type CardPropsType = {
   price: number;
   methods: number[];
   sizes: number[];
+  totalRecords?: number;
 };
 type CartItemType = {
   id: number;

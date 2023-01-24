@@ -27,7 +27,7 @@ export const fetchProducts = createAsyncThunk<
     searchValue,
     currentPage
   );
-
+  // headers["x-total-count"];
   return data;
 });
 export const fetchProductById = createAsyncThunk(

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Skeleton from "../components/Card/Skeleton";
@@ -32,6 +32,26 @@ function ProductInfo() {
       ) : (
         status === Status.SUCCESS && <Card {...item} />
       )}
+      <Link to="/">
+        <button className="button button--back">
+          <svg
+            width="8"
+            height="14"
+            viewBox="0 0 8 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 13L1 6.93015L6.86175 1"
+              stroke="#D3D3D3"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></path>
+          </svg>
+          <span>Вернуться назад</span>
+        </button>
+      </Link>
     </div>
   );
 }
