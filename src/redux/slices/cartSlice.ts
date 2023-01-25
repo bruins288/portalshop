@@ -3,9 +3,9 @@ import { RootState } from "./../store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: ICartSliceState = {
-  products: getCartProductLS().products ?? [],
-  totalPrice: getCartProductLS().totalPrice ?? 0,
-  totalCount: getCartProductLS().totalCount ?? 0,
+  products: getCartProductLS() ? getCartProductLS().products : [],
+  totalPrice: getCartProductLS() ? getCartProductLS().totalPrice : 0,
+  totalCount: getCartProductLS() ? getCartProductLS().totalCount : 0,
 };
 
 export const cartSlice = createSlice({
